@@ -15,9 +15,38 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+//Version Code
+val isAppBundleBuild = gradle.startParameter.taskNames.any { it.lowercase().contains("bundle") }
+
+// Load or create version.properties file
+val versionPropsFile = file("version.properties")
+val versionProps = Properties()
+
+if (versionPropsFile.canRead()) {
+    versionProps.load(versionPropsFile.inputStream())
+} else {
+    versionProps["VERSION_CODE"] = "1"
+}
+
+// Read current version code
+var code = versionProps["VERSION_CODE"].toString().toInt()
+
+// Increment only when building an AppBundle
+if (isAppBundleBuild) {
+    code++
+    versionProps["VERSION_CODE"] = code.toString()
+    versionProps.store(versionPropsFile.writer(), null)
+    println("Building AppBundle → versionCode = $code")
+}
+
+// Make 'code' available to android { } block
+extra["versionCodeProp"] = code
+println("Building AppBundle with versionCode = ${code}")
+
+
 android {
     namespace = "com.social.orbix"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -36,7 +65,7 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
+        versionCode = extra["versionCodeProp"] as Int
         versionName = flutter.versionName
     }
 

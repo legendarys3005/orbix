@@ -29,7 +29,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
               icon: Icon(Iconsax.notification, size: 30),
             ),
             Text("Orbix", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: OrbixColors.primaryColor)),
-            IconButton(onPressed: () {}, icon: Icon(Iconsax.message, size: 30)),
+            IconButton(onPressed: () {}, icon: Icon(Iconsax.message_text, size: 30)),
           ],
         ),
       ),

@@ -21,7 +21,7 @@ class NavigationMenu extends StatelessWidget {
           () => Padding(
             padding: const EdgeInsets.symmetric(horizontal: OrbixSizes.sm),
             child: NavigationBar(
-              height: 80,
+              height: 60,
               elevation: 0,
               selectedIndex: NavigationController.selectedIndex.value,
               onDestinationSelected: (index) =>
