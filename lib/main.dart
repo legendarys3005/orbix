@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orbix/navigation_menu.dart';
 import 'package:orbix/utils/theme/theme.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: "https://dkexklplndjopzaasgfp.supabase.co",
+    publishableKey: "sb_publishable_W9qup0T4vGi2vVljiuroBA_ao6fJCle",
+  );
 
   runApp(const Orbix());
 }
