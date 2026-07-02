@@ -20,4 +20,12 @@ class OrbixTheme{
     // outlinedButtonTheme: NexsusOutlinedButtonTheme.lightOutlinedButtonTheme,
     // inputDecorationTheme: NexsusTextFormFieldTheme.lightInputDecorationTheme,
   );
+
+  static ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    fontFamily: GoogleFonts.geist().fontFamily,
+    brightness: Brightness.dark,
+    primaryColor: OrbixColors.darkPrimaryColor,
+    scaffoldBackgroundColor: OrbixColors.darkBackgroundColor,
+  );
 }

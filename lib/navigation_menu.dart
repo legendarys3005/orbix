@@ -8,6 +8,7 @@ import 'package:orbix/content/profile/profile.dart';
 import 'package:orbix/content/reels/reels.dart';
 import 'package:orbix/utils/constant/colors.dart';
 import 'package:orbix/utils/constant/sizes.dart';
+import 'package:orbix/utils/helpers/helper_functions.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -15,6 +16,7 @@ class NavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationController());
+    final dark = OrbixHelperFunctions.isDarkMode(context);
     return Scaffold(
       bottomNavigationBar: ClipRRect(
         child: Obx(
@@ -26,16 +28,16 @@ class NavigationMenu extends StatelessWidget {
               selectedIndex: NavigationController.selectedIndex.value,
               onDestinationSelected: (index) =>
                   NavigationController.selectedIndex.value = index,
-              backgroundColor: OrbixColors.backgroundColor,
-              indicatorColor: OrbixColors.primaryColor.withAlpha(
+              backgroundColor: dark? OrbixColors.darkBackgroundColor: OrbixColors.backgroundColor,
+              indicatorColor: (dark? OrbixColors.darkPrimaryColor: OrbixColors.primaryColor).withAlpha(
                 (225 * 0.2).round(),
               ),
               destinations: [
-                NavigationDestination(icon: Icon(CupertinoIcons.home), selectedIcon: Icon(CupertinoIcons.house_fill), label: "Home"),
-                NavigationDestination(icon: Icon(CupertinoIcons.play_rectangle), selectedIcon: Icon(CupertinoIcons.play_rectangle_fill), label: "Reels"),
-                NavigationDestination(icon: Icon(CupertinoIcons.add_circled), selectedIcon: Icon(CupertinoIcons.add_circled_solid), label: "Create"),
-                NavigationDestination(icon: Icon(CupertinoIcons.compass), selectedIcon: Icon(CupertinoIcons.compass_fill), label: "Explore"),
-                NavigationDestination(icon: Icon(CupertinoIcons.person_crop_circle), selectedIcon: Icon(CupertinoIcons.person_crop_circle_fill), label: "Profile"),
+                NavigationDestination(icon: Icon(CupertinoIcons.home, color: dark? Colors.white: Colors.black), selectedIcon: Icon(CupertinoIcons.house_fill, color: dark? Colors.white: Colors.black), label: "Home"),
+                NavigationDestination(icon: Icon(CupertinoIcons.play_rectangle, color: dark? Colors.white: Colors.black), selectedIcon: Icon(CupertinoIcons.play_rectangle_fill, color: dark? Colors.white: Colors.black), label: "Reels"),
+                NavigationDestination(icon: Icon(CupertinoIcons.add_circled, color: dark? Colors.white: Colors.black), selectedIcon: Icon(CupertinoIcons.add_circled_solid, color: dark? Colors.white: Colors.black), label: "Create"),
+                NavigationDestination(icon: Icon(CupertinoIcons.compass, color: dark? Colors.white: Colors.black), selectedIcon: Icon(CupertinoIcons.compass_fill, color: dark? Colors.white: Colors.black), label: "Explore"),
+                NavigationDestination(icon: Icon(CupertinoIcons.person_crop_circle, color: dark? Colors.white: Colors.black), selectedIcon: Icon(CupertinoIcons.person_crop_circle_fill, color: dark? Colors.white: Colors.black), label: "Profile"),
               ],
             ),
           ),

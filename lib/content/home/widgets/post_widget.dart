@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:orbix/content/home/widgets/post_icons.dart';
-import 'package:orbix/utils/constant/colors.dart';
 import 'package:orbix/utils/constant/sizes.dart';
+import 'package:orbix/utils/helpers/helper_functions.dart';
 
 class OrbixPostWidget extends StatelessWidget {
   const OrbixPostWidget({
@@ -27,6 +27,7 @@ class OrbixPostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RxBool isLiked = false.obs;
     RxBool saved = false.obs;
+    final dark = OrbixHelperFunctions.isDarkMode(context);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withAlpha((255 * 0.5).round())),
@@ -92,25 +93,25 @@ class OrbixPostWidget extends StatelessWidget {
                                   : CupertinoIcons.heart_fill,
                               color: isLiked.value
                                   ? Colors.red
-                                  : OrbixColors.defaultIconColor,
+                                  : dark? Colors.white: Colors.black,
                             ),
                             onIconPressed: () => isLiked.value = !isLiked.value,
                             count: "1.2k",
                           ),
                         ),
                         OrbixPostIcons(
-                          icon: Icon(Icons.mode_comment_outlined, color: OrbixColors.defaultIconColor),
+                          icon: Icon(Icons.mode_comment_outlined, color: dark? Colors.white: Colors.black),
                           count: "482",
                         ),
                         OrbixPostIcons(
-                          icon: Icon(Iconsax.send_1, color: OrbixColors.defaultIconColor),
+                          icon: Icon(Iconsax.send_1, color: dark? Colors.white: Colors.black),
                           count: "1k",
                         ),
                       ],
                     ),
                     Obx(
                     () => OrbixPostIcons(
-                        icon: Icon(saved.value? CupertinoIcons.bookmark_fill: CupertinoIcons.bookmark, color: OrbixColors.defaultIconColor),
+                        icon: Icon(saved.value? CupertinoIcons.bookmark_fill: CupertinoIcons.bookmark, color: dark? Colors.white: Colors.black),
                       onIconPressed: () => saved.value = !saved.value,
                       ),
                     )
@@ -120,7 +121,7 @@ class OrbixPostWidget extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     text: "$name  ",
-                    style: GoogleFonts.geist(fontWeight: FontWeight.w600, color: Colors.black),
+                    style: GoogleFonts.geist(fontWeight: FontWeight.w600, color: dark? Colors.white: Colors.black),
                     children: [
                       TextSpan(
                         text: caption,

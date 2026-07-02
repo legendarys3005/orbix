@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:orbix/common/widget/appbars/profile_appbar.dart';
-import 'package:orbix/common/widget/images/circular_images.dart';
+import 'package:orbix/content/profile/widgets/post_section.dart';
+import 'package:orbix/content/profile/widgets/reel_section.dart';
+import 'package:orbix/content/profile/widgets/tagged_section.dart';
+import 'package:orbix/content/profile/widgets/user_data.dart';
+import 'package:orbix/content/profile/widgets/user_stats.dart';
 import 'package:orbix/utils/constant/colors.dart';
 import 'package:orbix/utils/constant/image_strings.dart';
 import 'package:orbix/utils/constant/sizes.dart';
+import 'package:orbix/utils/helpers/helper_functions.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dark = OrbixHelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: ProfileAppbar(),
       body: DefaultTabController(
@@ -20,75 +25,23 @@ class ProfilePage extends StatelessWidget {
             return [
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.all(OrbixSizes.defaultSpace),
+                  padding: const EdgeInsets.all(OrbixSizes.paddingLg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //User Data
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          OrbixCircularImages(
-                            width: 60,
-                            imageUrl: OrbixImages.pfp,
-                          ),
-                          const SizedBox(width: OrbixSizes.sm),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text("Talentless Homo Sapiens", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
-                                  const SizedBox(width: OrbixSizes.xs),
-                                  Icon(Iconsax.verify5, size: 22, color: OrbixColors.primaryColor),
-                                ],
-                              ),
-                              Text("king_sapiens"),
-                            ],
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: OrbixSizes.sm),
-                      //Bio and data
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("male", style: TextStyle(color: Colors.black45)),
-                          Text("Dancer🍂\nFlutist🪈\nText Editor😎\nGamer🎮\n#HereJustToBeHere", style: TextStyle(fontSize: 12)),
-                        ],
+                      ProfileUserData(
+                        profilePicture: OrbixImages.pfp,
+                        username: "king_sapiens",
+                        displayName: "Talentless Homo Sapiens",
+                        bio: "Dancer🍂\nFlutist🪈\nText Editor😎\nGamer🎮\n#HereJustToBeHere",
+                        isVerified: true,
                       ),
                       const SizedBox(height: OrbixSizes.spaceBtwItems),
                       //User Stats
-                      Container(
-                        padding: const EdgeInsets.all(OrbixSizes.sm),
-                        decoration: BoxDecoration(
-                            color: Color(0xFFF0F0F0),
-                            borderRadius: BorderRadius.circular(OrbixSizes.borderRadiusMd)
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                Text("Posts", style: TextStyle(fontWeight: FontWeight.w700)),
-                                Text("50")
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text("Followers", style: TextStyle(fontWeight: FontWeight.w700)),
-                                Text("1.4k")
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text("Following", style: TextStyle(fontWeight: FontWeight.w700)),
-                                Text("532")
-                              ],
-                            ),
-                          ],
-                        ),
+                      ProfileUserStats(
+                        posts: "50",
+                        followers: "1.4k",
+                        following: "532",
                       ),
                       const SizedBox(height: OrbixSizes.spaceBtwItems),
                       //Buttons
@@ -99,8 +52,8 @@ class ProfilePage extends StatelessWidget {
                               onPressed: (){},
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                backgroundColor: Color(0xFFF0F0F0),
-                                foregroundColor: Colors.black,
+                                backgroundColor: dark? Color(0xFF222222): Color(0xFFF0F0F0),
+                                foregroundColor: dark? Colors.white: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -114,8 +67,8 @@ class ProfilePage extends StatelessWidget {
                               onPressed: (){},
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                backgroundColor: Color(0xFFF0F0F0),
-                                foregroundColor: Colors.black,
+                                backgroundColor: dark? Color(0xFF222222): Color(0xFFF0F0F0),
+                                foregroundColor: dark? Colors.white: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -132,9 +85,9 @@ class ProfilePage extends StatelessWidget {
               SliverAppBar(
                 automaticallyImplyLeading: false,
                 toolbarHeight: 0,
-                backgroundColor: Colors.white,
-                bottom: const TabBar(
-                  indicatorColor: OrbixColors.primaryColor,
+                backgroundColor: dark? OrbixColors.darkBackgroundColor: OrbixColors.backgroundColor,
+                bottom: TabBar(
+                  indicatorColor: dark? OrbixColors.darkPrimaryColor: OrbixColors.primaryColor,
                   splashFactory: NoSplash.splashFactory,
                   tabs: [
                     Tab(icon: Icon(Icons.grid_on, color: OrbixColors.primaryColor,)),
@@ -145,15 +98,12 @@ class ProfilePage extends StatelessWidget {
               ),
             ];
           },
-          body: Padding(
-            padding: const EdgeInsets.all(OrbixSizes.defaultSpace),
-            child:  TabBarView(
-              children: [
-                Center(child: Text("Posts")),
-                Center(child: Text("Reels")),
-                Center(child: Text("Tagged")),
-              ],
-            ),
+          body: TabBarView(
+            children: [
+              PostSection(),
+              ReelSection(),
+              TaggedSection(),
+            ],
           ),
         ),
       ),

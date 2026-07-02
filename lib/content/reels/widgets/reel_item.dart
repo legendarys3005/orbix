@@ -6,6 +6,7 @@ import 'package:orbix/common/widget/images/circular_images.dart';
 import 'package:orbix/utils/constant/colors.dart';
 import 'package:orbix/utils/constant/image_strings.dart';
 import 'package:orbix/utils/constant/sizes.dart';
+import 'package:orbix/utils/helpers/helper_functions.dart';
 
 class ReelItem extends StatelessWidget {
   const ReelItem({super.key});
@@ -13,20 +14,28 @@ class ReelItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RxBool following = false.obs;
+    RxBool isLiked = false.obs;
+    final dark = OrbixHelperFunctions.isDarkMode(context);
     return Stack(
       children: [
-        Positioned.fill(child: Image.asset(OrbixImages.logo)),
         Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Colors.black54,
-                ],
+          child: Image.asset(OrbixImages.logo, fit: BoxFit.contain),
+        ),
+        Positioned.fill(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onDoubleTap: () => isLiked.value = true,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.transparent,
+                    Colors.black54,
+                  ],
+                ),
               ),
             ),
           ),
@@ -58,7 +67,9 @@ class ReelItem extends StatelessWidget {
                         duration: Duration(milliseconds: 200),
                         decoration: BoxDecoration(
                           color: following.value
-                              ? OrbixColors.primaryColor
+                              ? dark
+                                    ? OrbixColors.darkPrimaryColor
+                                    : OrbixColors.primaryColor
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(50),
                           border: Border.all(
@@ -95,27 +106,55 @@ class ReelItem extends StatelessWidget {
             ],
           ),
         ),
+        //Right Buttons
         Positioned(
           right: 12,
           bottom: 20,
           child: Column(
             children: [
-              Icon(CupertinoIcons.heart, color: Colors.white, size: 27),
+              Obx(
+                () => GestureDetector(
+                  onTap: () => isLiked.value = !isLiked.value,
+                  child: Icon(
+                    !isLiked.value
+                        ? CupertinoIcons.heart
+                        : CupertinoIcons.heart_fill,
+                    color: isLiked.value ? Colors.red : Colors.white,
+                    size: 27,
+                  ),
+                ),
+              ),
               Text("1.2k", style: TextStyle(color: Colors.white, fontSize: 10)),
               const SizedBox(height: OrbixSizes.spaceBtwItems),
-              Icon(Icons.mode_comment_outlined, color: Colors.white, size: 27),
+              GestureDetector(
+                child: Icon(
+                  Icons.mode_comment_outlined,
+                  color: Colors.white,
+                  size: 27,
+                ),
+              ),
               Text("47", style: TextStyle(color: Colors.white, fontSize: 10)),
               const SizedBox(height: OrbixSizes.spaceBtwItems),
-              Icon(Iconsax.send_1, color: Colors.white, size: 27),
+              GestureDetector(
+                child: Icon(Iconsax.send_1, color: Colors.white, size: 27),
+              ),
               Text("12", style: TextStyle(color: Colors.white, fontSize: 10)),
               const SizedBox(height: OrbixSizes.spaceBtwItems),
-              Icon(CupertinoIcons.bookmark, color: Colors.white, size: 27),
+              GestureDetector(
+                child: Icon(
+                  CupertinoIcons.bookmark,
+                  color: Colors.white,
+                  size: 27,
+                ),
+              ),
               Text("9", style: TextStyle(color: Colors.white, fontSize: 10)),
               const SizedBox(height: OrbixSizes.spaceBtwItems),
-              Icon(
-                CupertinoIcons.ellipsis_vertical,
-                color: Colors.white,
-                size: 25,
+              GestureDetector(
+                child: Icon(
+                  CupertinoIcons.ellipsis_vertical,
+                  color: Colors.white,
+                  size: 25,
+                ),
               ),
               const SizedBox(height: OrbixSizes.spaceBtwSections),
               Container(

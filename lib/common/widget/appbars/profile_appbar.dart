@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:orbix/utils/constant/colors.dart';
 import 'package:orbix/utils/constant/sizes.dart';
+import 'package:orbix/utils/helpers/helper_functions.dart';
 
 class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget{
   const ProfileAppbar({super.key, this.appbarHeight});
@@ -10,6 +11,7 @@ class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
+    final dark = OrbixHelperFunctions.isDarkMode(context);
     return Container(
       padding: const EdgeInsets.only(
         left: OrbixSizes.sm,
@@ -28,14 +30,14 @@ class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget{
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("king_sapiens", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: OrbixColors.primaryColor)),
+                  Text("king_sapiens", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: dark? OrbixColors.darkPrimaryColor: OrbixColors.primaryColor)),
                   const SizedBox(width: OrbixSizes.xs),
-                  Icon(Iconsax.arrow_down_1, size: 15, color: OrbixColors.primaryColor, fontWeight: FontWeight.w600),
+                  Icon(Iconsax.arrow_down_1, size: 15, color: dark? OrbixColors.darkPrimaryColor: OrbixColors.primaryColor, fontWeight: FontWeight.w600),
                 ],
               ),
             ),
             Expanded(child: SizedBox()),
-            IconButton(onPressed: () {}, icon: Icon(Iconsax.setting, size: 30)),
+            IconButton(onPressed: () {}, icon: Icon(Iconsax.setting, size: 25)),
           ],
         ),
       ),

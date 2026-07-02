@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:orbix/utils/constant/colors.dart';
 import 'package:orbix/utils/constant/sizes.dart';
+import 'package:orbix/utils/helpers/helper_functions.dart';
 
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppbar({super.key, this.appbarHeight});
@@ -10,8 +11,8 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = OrbixHelperFunctions.isDarkMode(context);
     return Container(
-      // color: Colors.red,
       padding: const EdgeInsets.only(
         left: OrbixSizes.sm,
         right: OrbixSizes.sm,
@@ -28,7 +29,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {},
               icon: Icon(Iconsax.notification, size: 30),
             ),
-            Text("Orbix", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: OrbixColors.primaryColor)),
+            Text("Orbix", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: dark? OrbixColors.darkPrimaryColor: OrbixColors.primaryColor)),
             IconButton(onPressed: () {}, icon: Icon(Iconsax.message_text, size: 30)),
           ],
         ),

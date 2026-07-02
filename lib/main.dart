@@ -21,8 +21,9 @@ class Orbix extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: OrbixTheme.lightTheme,
+      darkTheme: OrbixTheme.darkTheme,
       home: NavigationMenu(),
     );
   }

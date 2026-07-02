@@ -5,12 +5,14 @@ import 'package:orbix/content/home/widgets/story_widget.dart';
 import 'package:orbix/utils/constant/colors.dart';
 import 'package:orbix/utils/constant/image_strings.dart';
 import 'package:orbix/utils/constant/sizes.dart';
+import 'package:orbix/utils/helpers/helper_functions.dart';
 
 class OrbixStorySection extends StatelessWidget {
   const OrbixStorySection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dark = OrbixHelperFunctions.isDarkMode(context);
     return Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -29,7 +31,7 @@ class OrbixStorySection extends StatelessWidget {
                   child: Icon(
                     Iconsax.add,
                     size: 35,
-                    color: OrbixColors.primaryColor,
+                    color: dark? OrbixColors.darkPrimaryColor: OrbixColors.primaryColor,
                   ),
                 ),
               ),
@@ -54,7 +56,7 @@ class OrbixStorySection extends StatelessWidget {
                       height: 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: OrbixColors.primaryColor, width: 3),
+                        border: Border.all(color: dark? OrbixColors.darkPrimaryColor: OrbixColors.primaryColor, width: 3),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(3),
