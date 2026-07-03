@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:orbix/utils/constant/colors.dart';
+import 'package:orbix/utils/theme/custom_themes/text_field_theme.dart';
 
 class OrbixTheme{
   OrbixTheme._();
@@ -18,7 +19,7 @@ class OrbixTheme{
     // bottomSheetTheme: NexsusBottomSheetTheme.lightBottomSheetTheme,
     // elevatedButtonTheme: NexsusElevatedButtonTheme.lightElevatedButtonTheme,
     // outlinedButtonTheme: NexsusOutlinedButtonTheme.lightOutlinedButtonTheme,
-    // inputDecorationTheme: NexsusTextFormFieldTheme.lightInputDecorationTheme,
+    inputDecorationTheme: OrbixInputFieldTheme.lightInputDecorationTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -27,5 +28,6 @@ class OrbixTheme{
     brightness: Brightness.dark,
     primaryColor: OrbixColors.darkPrimaryColor,
     scaffoldBackgroundColor: OrbixColors.darkBackgroundColor,
+    inputDecorationTheme: OrbixInputFieldTheme.darkInputDecorationTheme,
   );
 }

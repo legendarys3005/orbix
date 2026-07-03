@@ -12,8 +12,8 @@ class ReelSection extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 1,
-        mainAxisSpacing: 1,
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 2,
         childAspectRatio: 0.5625,
       ),
       itemCount: 30,

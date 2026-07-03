@@ -50,6 +50,7 @@ class OrbixSizes{
 
   //Input field
   static const double inputFieldRadius = 12.0;
+  static const double focusedInputFieldRadius = 8.0;
   static const double spaceBtwInputField = 16.0;
 
   //Card sizes

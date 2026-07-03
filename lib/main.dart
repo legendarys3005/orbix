@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orbix/navigation_menu.dart';
+import 'package:orbix/content/login/login.dart';
 import 'package:orbix/utils/theme/theme.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -24,7 +24,7 @@ class Orbix extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: OrbixTheme.lightTheme,
       darkTheme: OrbixTheme.darkTheme,
-      home: NavigationMenu(),
+      home: LoginPage(),
     );
   }
 }
