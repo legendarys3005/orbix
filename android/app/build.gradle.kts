@@ -45,7 +45,7 @@ println("Building AppBundle with versionCode = ${code}")
 
 
 android {
-    namespace = "com.social.orbix"
+    namespace = "com.orbix.social"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 

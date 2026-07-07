@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="app_name">Orbix</string>
+
+    <string name="shortcut_reels">Reels</string>
+    <string name="shortcut_reels_long">Open Reels</string>
+
+    <string name="shortcut_new_post">New Post</string>
+    <string name="shortcut_new_post_long">Create a post</string>
+
+    <string name="shortcut_profile">Profile</string>
+    <string name="shortcut_profile_long">Open Profile</string>
+
+</resources>

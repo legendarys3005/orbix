@@ -1,4 +1,4 @@
-package com.social.orbix
+package com.orbix.social
 
 import io.flutter.embedding.android.FlutterActivity
 

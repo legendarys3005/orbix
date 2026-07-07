@@ -18,28 +18,32 @@ class ProfileUserStats extends StatelessWidget {
           color: dark? Color(0xFF222222): Color(0xFFF0F0F0),
           borderRadius: BorderRadius.circular(OrbixSizes.borderRadiusMd)
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(
-            children: [
-              Text("Posts", style: TextStyle(fontWeight: FontWeight.w700)),
-              Text(posts)
-            ],
-          ),
-          Column(
-            children: [
-              Text("Followers", style: TextStyle(fontWeight: FontWeight.w700)),
-              Text(followers)
-            ],
-          ),
-          Column(
-            children: [
-              Text("Following", style: TextStyle(fontWeight: FontWeight.w700)),
-              Text(following)
-            ],
-          ),
-        ],
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              children: [
+                Text("Posts", style: TextStyle(fontWeight: FontWeight.w700)),
+                Text(posts)
+              ],
+            ),
+            const VerticalDivider(color: Colors.white12),
+            Column(
+              children: [
+                Text("Followers", style: TextStyle(fontWeight: FontWeight.w700)),
+                Text(followers)
+              ],
+            ),
+            const VerticalDivider(color: Colors.white12),
+            Column(
+              children: [
+                Text("Following", style: TextStyle(fontWeight: FontWeight.w700)),
+                Text(following)
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
