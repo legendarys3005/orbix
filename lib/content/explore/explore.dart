@@ -60,7 +60,6 @@ class ExplorePage extends StatelessWidget {
                 child: SizedBox(
                   height: 30,
                   child: ListView.separated(
-                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: 8,
                     separatorBuilder: (_, _) => const SizedBox(width: OrbixSizes.sm),

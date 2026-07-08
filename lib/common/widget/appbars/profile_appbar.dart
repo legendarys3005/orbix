@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:orbix/controllers/user_controller.dart';
 import 'package:orbix/utils/constant/colors.dart';
 import 'package:orbix/utils/constant/sizes.dart';
 import 'package:orbix/utils/helpers/helper_functions.dart';
@@ -12,6 +13,7 @@ class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     final dark = OrbixHelperFunctions.isDarkMode(context);
+    final controller = UserController.instance;
     return Container(
       padding: const EdgeInsets.only(
         left: OrbixSizes.sm,
@@ -23,10 +25,10 @@ class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget{
       ),
       child: SafeArea(
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(width: OrbixSizes.sm),
-            GestureDetector(
+            InkWell(
+              onTap: () => controller.showAccountBottomSheet(context),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
